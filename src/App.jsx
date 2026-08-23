@@ -183,12 +183,32 @@ function CaseStudy({ onBack }) {
 
       <Section eyebrow="01 — Constraints" title="What I actually had.">
         <p className="case-p italic">Stated up front, because a case study that hides its constraints is selling you something.</p>
-        <h3 className="case-h3">Brief</h3><p className="case-p">Pick a product you use, add a feature you've always wanted. Take a risk.</p>
-        <h3 className="case-h3">Time</h3><p className="case-p">Five days.</p>
-        <h3 className="case-h3">Research</h3><p className="case-p">None. No users tested. This is a problem I live weekly, not one I validated.</p>
-        <h3 className="case-h3">Surface</h3><p className="case-p">Smart TV — a ten-foot, remote-first interface, not a phone.</p>
-        <h3 className="case-h3">Mockups</h3><p className="case-p">Hand-built in HTML, imported to Figma. I build, so I prototyped in the real medium.</p>
-        <h3 className="case-h3">AI</h3><p className="case-p">Used to accelerate. The idea, the decisions and the why are mine — and defensible live.</p>
+        <div className="constraints-grid">
+          <div className="constraint-cell">
+            <p className="constraint-k">Brief</p>
+            <p className="constraint-v">Pick a product you use, add a feature you've always wanted. Take a risk.</p>
+          </div>
+          <div className="constraint-cell">
+            <p className="constraint-k">Time</p>
+            <p className="constraint-v">Five days.</p>
+          </div>
+          <div className="constraint-cell">
+            <p className="constraint-k">Research</p>
+            <p className="constraint-v">None. No users tested. This is a problem I live weekly, not one I validated.</p>
+          </div>
+          <div className="constraint-cell">
+            <p className="constraint-k">Surface</p>
+            <p className="constraint-v">Smart TV — a ten-foot, remote-first interface, not a phone.</p>
+          </div>
+          <div className="constraint-cell">
+            <p className="constraint-k">Mockups</p>
+            <p className="constraint-v">Hand-built in HTML, imported to Figma. I build, so I prototyped in the real medium.</p>
+          </div>
+          <div className="constraint-cell">
+            <p className="constraint-k">AI</p>
+            <p className="constraint-v">Used to accelerate. The idea, the decisions and the why are mine — and defensible live.</p>
+          </div>
+        </div>
       </Section>
 
       <Section eyebrow="02 — The problem" title="The couch problem.">
