@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import futbolLogo from './assets/futbol.svg'
 import theCouchProblem from './assets/the_couch_problem.png'
 import sayWhoHere from './assets/say_who_here.png'
@@ -98,38 +99,66 @@ function Home({ onOpenCase }) {
       </div>
 
       <div className="tabs" role="tablist">
-        <button role="tab" aria-selected={tab === 'projects'} className={`tab ${tab === 'projects' ? 'active' : ''}`} onClick={() => setTab('projects')}>Projects</button>
-        <button role="tab" aria-selected={tab === 'experience'} className={`tab ${tab === 'experience' ? 'active' : ''}`} onClick={() => setTab('experience')}>Experience</button>
+        <button role="tab" aria-selected={tab === 'projects'} className={`tab ${tab === 'projects' ? 'active' : ''}`} onClick={() => setTab('projects')}>
+          {tab === 'projects' && <motion.div layoutId="tab-pill" className="tab-pill" transition={{ type: 'spring', stiffness: 400, damping: 30 }} />}
+          <span className="tab-label">Projects</span>
+        </button>
+        <button role="tab" aria-selected={tab === 'experience'} className={`tab ${tab === 'experience' ? 'active' : ''}`} onClick={() => setTab('experience')}>
+          {tab === 'experience' && <motion.div layoutId="tab-pill" className="tab-pill" transition={{ type: 'spring', stiffness: 400, damping: 30 }} />}
+          <span className="tab-label">Experience</span>
+        </button>
       </div>
 
-      {tab === 'projects' ? (
-        <div className="stack">
-          <ProjectCard onClick={onOpenCase} thumb="thumb-netflix" title="Decide Together — Netflix" desc="Netflix knows what each of us likes — it never uses that when two of us sit down. A couch-side feature: say who's watching, get three explained picks, veto anonymously, one tap to play." meta={['2026 · Case study', 'Product design + build', 'Smart TV']} />
-          <ProjectCard href={LINKS.futbol} external thumb="thumb-futbol" thumbImage={futbolLogo} title="FUTbol — Discord bot" desc="A Discord bot that runs the full weekly cycle of a casual football group. Day voting, attendance, waitlist, check-in and automatic team builder. Zero hosting cost." meta={['2025 · Live', 'TypeScript', 'Cloudflare Workers', 'D1', 'Drizzle ORM']} />
-        </div>
-      ) : (
-        <div className="exp-section">
-          <div className="exp-card">
-            <div className="exp-head">
-              <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                <div className="xarp-logo" aria-hidden><span className="xarp-xa">XA</span><span className="xarp-rp">RP</span></div>
-                <div>
-                  <p className="exp-role">Software Engineer Intern — Frontend & QA</p>
-                  <p className="exp-company">XARP, Reality Labs · Viana do Castelo, PT</p>
-                  <p className="exp-loc">Where exploratory testing became second nature.</p>
+      <div className="tab-panel-wrap">
+        <AnimatePresence mode="wait">
+          {tab === 'projects' ? (
+            <motion.div
+              key="projects"
+              initial={{ opacity: 0, y: 8, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -8, filter: 'blur(6px)' }}
+              transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
+              className="stack"
+            >
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06, duration: 0.32, ease: 'easeOut' }}>
+                <ProjectCard onClick={onOpenCase} thumb="thumb-netflix" title="Decide Together — Netflix" desc="Netflix knows what each of us likes — it never uses that when two of us sit down. A couch-side feature: say who's watching, get three explained picks, veto anonymously, one tap to play." meta={['2026 · Case study', 'Product design + build', 'Smart TV']} />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.32, ease: 'easeOut' }}>
+                <ProjectCard href={LINKS.futbol} external thumb="thumb-futbol" thumbImage={futbolLogo} title="FUTbol — Discord bot" desc="A Discord bot that runs the full weekly cycle of a casual football group. Day voting, attendance, waitlist, check-in and automatic team builder. Zero hosting cost." meta={['2025 · Live', 'TypeScript', 'Cloudflare Workers', 'D1', 'Drizzle ORM']} />
+              </motion.div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="experience"
+              initial={{ opacity: 0, y: 8, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -8, filter: 'blur(6px)' }}
+              transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
+              className="exp-section"
+            >
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08, duration: 0.32, ease: 'easeOut' }} className="exp-card">
+                <div className="exp-head">
+                  <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <div className="xarp-logo" aria-hidden><span className="xarp-xa">XA</span><span className="xarp-rp">RP</span></div>
+                    <div>
+                      <p className="exp-role">Software Engineer Intern — Frontend & QA</p>
+                      <p className="exp-company">XARP, Reality Labs · Viana do Castelo, PT</p>
+                      <p className="exp-loc">Where exploratory testing became second nature.</p>
+                    </div>
+                  </div>
+                  <span className="exp-date">Mar – Jun 2026</span>
                 </div>
-              </div>
-              <span className="exp-date">Mar – Jun 2026</span>
-            </div>
-            <ul className="exp-bullets">
-              <li>Mapped key user flows (login, outfit creation, scheduling) to guide my own testing.</li>
-              <li>Ran exploratory and manual testing on the mobile app, flagging bugs, errors, and UI/UX improvement opportunities, logged as tickets in GitHub Projects.</li>
-              <li>Contributed to a fully client-side Virtual Try-On engine for cosmetic lip transformation, working within real browser-performance constraints.</li>
-            </ul>
-            <div className="tag-row">{['React', 'TypeScript', 'Vite', 'Zustand', 'Tailwind CSS'].map((t) => <span key={t} className="tag">{t}</span>)}</div>
-          </div>
-        </div>
-      )}
+                <ul className="exp-bullets">
+                  <motion.li initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.14, duration: 0.25 }}>Mapped key user flows (login, outfit creation, scheduling) to guide my own testing.</motion.li>
+                  <motion.li initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.18, duration: 0.25 }}>Ran exploratory and manual testing on the mobile app, flagging bugs, errors, and UI/UX improvement opportunities, logged as tickets in GitHub Projects.</motion.li>
+                  <motion.li initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.22, duration: 0.25 }}>Contributed to a fully client-side Virtual Try-On engine for cosmetic lip transformation, working within real browser-performance constraints.</motion.li>
+                </ul>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.28, duration: 0.3 }} className="tag-row">{['React', 'TypeScript', 'Vite', 'Zustand', 'Tailwind CSS'].map((t, i) => <motion.span key={t} initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 + i * 0.04 }} className="tag">{t}</motion.span>)}</motion.div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </>
   )
 }

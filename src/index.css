@@ -150,14 +150,34 @@ button { font: inherit; }
   background: transparent;
   color: var(--fg-faint);
   cursor: pointer;
-  transition: all 0.15s;
+  transition: color 0.15s;
+  position: relative;
+  isolation: isolate;
+}
+.tab-pill {
+  position: absolute;
+  inset: 0;
+  background: var(--pill-active);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  z-index: 0;
+}
+.tab-label {
+  position: relative;
+  z-index: 1;
 }
 .tab.active {
-  background: var(--pill-active);
+  background: transparent;
   color: var(--pill-active-fg);
-  border-color: var(--border);
+  border-color: transparent;
 }
 .tab:hover:not(.active) { color: var(--fg-muted); }
+.tab-panel-wrap {
+  position: relative;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tab-pill { transition: none !important; }
+}
 
 /* cards */
 .stack { display: flex; flex-direction: column; gap: 12px; }
