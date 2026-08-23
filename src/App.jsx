@@ -8,6 +8,7 @@ import handleMessy from './assets/handle_the_messy_case.png'
 import honestLimits from './assets/honest_limits.png'
 
 const LINKS = {
+  xarp: 'https://xarp.ai/',
   github: 'https://github.com/Telmo1337',
   linkedin: 'https://www.linkedin.com/in/telmo-regalado-b193b59b/',
   email: 'mailto:telmoregalado@gmail.com',
@@ -45,7 +46,7 @@ function Header({ onBrandClick, theme, toggleTheme }) {
 
 function ProjectCard({ title, desc, thumb, thumbImage, meta, href, onClick, external }) {
   const El = onClick ? 'button' : 'a'
-  const props = onClick ? { onClick } : { href, target: external ? '_blank' : undefined, rel: external ? 'noreferrer' : undefined }
+  const props = onClick ? { onClick } : { href, target: external ? '_blank' : undefined, rel: external ? 'noopener noreferrer' : undefined }
   return (
     <El className="card" {...props}>
       <div className={`card-media ${thumb}`}>
@@ -88,13 +89,13 @@ function Home({ onOpenCase }) {
     <>
       <div className="intro">
         <p>
-          I'm a <span className="em">product designer / engineer</span> with a passion for motion and craft. Previously Software Engineer Intern at <a className="dotted" href="#" onClick={(e) => e.preventDefault()}>XARP, Reality Labs</a> — where I worked on a fully client-side Virtual Try-On engine and exploratory QA.
+          I'm a <span className="em">product designer / engineer</span> with a passion for motion and craft. Previously Software Engineer Intern at <a className="dotted" href={LINKS.xarp} target="_blank" rel="noopener noreferrer">XARP, Reality Labs</a> — where I worked on a fully client-side Virtual Try-On engine and exploratory QA.
         </p>
         <p>
           I design and build. <span className="em">Decide Together</span> is a Netflix couch-side concept for when two people sit down — say who's watching, get three explained picks, veto quietly, one tap to play. <span className="em">FUTbol</span> is a serverless Discord bot that runs the weekly cycle of a casual football group.
         </p>
         <p>
-          You can find me on <a className="dotted" href={LINKS.github} target="_blank" rel="noreferrer">GitHub</a> and <a className="dotted" href={LINKS.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>, or reach me by <a className="dotted" href={LINKS.email}>email</a>.
+          You can find me on <a className="dotted" href={LINKS.github} target="_blank" rel="noopener noreferrer">GitHub</a> and <a className="dotted" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>, or reach me by <a className="dotted" href={LINKS.email}>email</a>.
         </p>
       </div>
 
@@ -229,7 +230,7 @@ function CaseStudy({ onBack }) {
           <p className="case-p"><strong>Colophon</strong> — This case study is also the work sample. I designed the thing, then I built the page you read it on. The screening room, the scroll and the type are React. Every screen is the interface I submitted, rebuilt as a component.</p>
         </div>
         <div className="case-actions">
-          <a href={LINKS.github} target="_blank" rel="noreferrer" className="pill-ghost">GitHub →</a>
+          <a href={LINKS.github} target="_blank" rel="noopener noreferrer" className="pill-ghost">GitHub →</a>
           <button onClick={onBack} className="pill-solid">Back to work</button>
         </div>
       </Section>
@@ -242,23 +243,79 @@ function Footer() {
     <footer className="footer">
       <div className="footer-inner">
         <span className="footer-copy">© {new Date().getFullYear()} Telmo Regalado</span>
-        <nav className="footer-links"><a href={LINKS.email}>Email</a><a href={LINKS.github} target="_blank" rel="noreferrer">GitHub</a><a href={LINKS.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></nav>
+        <nav className="footer-links"><a href={LINKS.email}>Email</a><a href={LINKS.github} target="_blank" rel="noopener noreferrer">GitHub</a><a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></nav>
       </div>
     </footer>
   )
 }
 
+function getViewFromURL() {
+  try {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('case') === 'decide-together') return 'case'
+    // legacy: support old #decide-together hash links
+    if (window.location.hash === '#decide-together') return 'case'
+  } catch {
+    // ignore malformed URL
+  }
+  return 'home'
+}
+
 export default function App() {
   const [theme, toggleTheme] = useTheme()
-  const [view, setView] = useState('home')
+  const [view, setView] = useState(() => (typeof window !== 'undefined' ? getViewFromURL() : 'home'))
+
   useEffect(() => {
-    const sync = () => setView(window.location.hash === '#decide-together' ? 'case' : 'home')
-    sync()
+    // Migrate legacy hash to clean query param (?case=decide-together)
+    try {
+      if (window.location.hash === '#decide-together' && new URLSearchParams(window.location.search).get('case') !== 'decide-together') {
+        const url = new URL(window.location.href)
+        url.hash = ''
+        url.searchParams.set('case', 'decide-together')
+        window.history.replaceState(null, '', url)
+        setView('case')
+      }
+    } catch {
+      // ignore
+    }
+    const sync = () => setView(getViewFromURL())
+    window.addEventListener('popstate', sync)
     window.addEventListener('hashchange', sync)
-    return () => window.removeEventListener('hashchange', sync)
+    return () => {
+      window.removeEventListener('popstate', sync)
+      window.removeEventListener('hashchange', sync)
+    }
   }, [])
-  const openCase = () => { window.location.hash = '#decide-together' }
-  const goHome = () => { window.location.hash = ''; setView('home'); window.scrollTo(0, 0) }
+
+  const openCase = () => {
+    try {
+      const url = new URL(window.location.href)
+      url.searchParams.set('case', 'decide-together')
+      url.hash = ''
+      window.history.pushState(null, '', url)
+    } catch {
+      // fallback
+      window.history.pushState(null, '', '?case=decide-together')
+    }
+    setView('case')
+    window.scrollTo(0, 0)
+  }
+
+  const goHome = () => {
+    try {
+      const url = new URL(window.location.href)
+      url.searchParams.delete('case')
+      url.hash = ''
+      // keep other unrelated query params if any, but remove `case`
+      const qs = url.searchParams.toString()
+      const next = `${url.pathname}${qs ? `?${qs}` : ''}`
+      window.history.pushState(null, '', next)
+    } catch {
+      window.history.pushState(null, '', window.location.pathname)
+    }
+    setView('home')
+    window.scrollTo(0, 0)
+  }
   return (
     <div className="shell">
       <Header onBrandClick={goHome} theme={theme} toggleTheme={toggleTheme} />
