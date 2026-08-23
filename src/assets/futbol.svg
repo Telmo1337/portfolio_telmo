@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="FUTbol logo">
+  <rect width="200" height="200" rx="40" fill="#0a0a0a"/>
+  <circle cx="100" cy="100" r="84" fill="none" stroke="white" stroke-width="6"/>
+  <!-- swoosh -->
+  <path d="M 38 128 C 46 160, 88 178, 138 162 C 92 168, 58 150, 62 112 C 56 124, 52 138, 62 112 C 48 128, 38 128, 38 128 Z" fill="white"/>
+  <path d="M 58 126 C 62 146, 86 160, 118 158 C 88 160, 66 148, 66 124 C 60 132, 58 126, 58 126 Z" fill="white"/>
+  <!-- ball outer -->
+  <circle cx="116" cy="96" r="56" fill="none" stroke="white" stroke-width="4"/>
+  <circle cx="116" cy="96" r="48" fill="white" stroke="black" stroke-width="2"/>
+  <!-- ball pattern (hexagons/pentagons simplified) -->
+  <g stroke="black" stroke-width="2.2" fill="white" stroke-linejoin="round">
+    <path d="M 116 58 L 138 68 L 132 92 L 110 100 L 90 88 L 96 64 Z" fill="white"/>
+    <path d="M 110 100 L 132 92 L 142 114 L 124 138 L 100 132 L 90 110 Z" fill="white"/>
+    <!-- black pentagons -->
+    <path d="M 138 68 L 162 74 L 158 98 L 132 92 Z" fill="black"/>
+    <path d="M 90 88 L 74 102 L 78 126 L 90 110 Z" fill="black"/>
+    <path d="M 124 138 L 142 114 L 150 142 L 128 160 Z" fill="black"/>
+  </g>
+  <circle cx="116" cy="96" r="48" fill="none" stroke="black" stroke-width="1.8"/>
+</svg>
