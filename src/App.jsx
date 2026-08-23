@@ -125,7 +125,7 @@ function Home({ onOpenCase }) {
                 <ProjectCard onClick={onOpenCase} thumb="thumb-netflix" title="Decide Together — Netflix" desc="Netflix knows what each of us likes — it never uses that when two of us sit down. A couch-side feature: say who's watching, get three explained picks, veto anonymously, one tap to play." meta={['2026 · Case study', 'Product design + build', 'Smart TV']} />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.32, ease: 'easeOut' }}>
-                <ProjectCard href={LINKS.futbol} external thumb="thumb-futbol" thumbImage={futbolLogo} title="FUTbol — Discord bot" desc="A Discord bot that runs the full weekly cycle of a casual football group. Day voting, attendance, waitlist, check-in and automatic team builder. Zero hosting cost." meta={['2025 · Live', 'TypeScript', 'Cloudflare Workers', 'D1', 'Drizzle ORM']} />
+                <ProjectCard href={LINKS.futbol} external thumb="thumb-futbol" thumbImage={futbolLogo} title="FUTbol — Discord bot" desc="A Discord bot that runs the full weekly cycle of a casual football group. Day voting, attendance, waitlist, check-in and automatic team builder. Zero hosting cost." meta={['TypeScript', 'Cloudflare Workers', 'D1', 'Drizzle ORM']} />
               </motion.div>
             </motion.div>
           ) : (
