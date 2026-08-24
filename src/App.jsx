@@ -84,60 +84,6 @@ function Fig({ src, alt }) {
   )
 }
 
-function HandsDivider() {
-  return (
-    <motion.div
-      className="hands-divider"
-      aria-hidden="true"
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
-    >
-      <motion.svg
-        viewBox="0 0 420 110"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="1.35"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.9, delay: 0.4 }}
-      >
-        {/* Left hand — Adam */}
-        <motion.g
-          initial={{ x: -14, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.35 }}
-        >
-          <path d="M0 76 L58 74.5 C66 74 74 73 80 70.5" />
-          <path d="M80 70.5 L113 69 C116.5 68.8 118.5 70.5 116.5 72.8 L62 77.5" />
-          <path d="M0 62.5 L60 62 C68 61.8 76 60.5 82 58.5" />
-          <path d="M82 58.5 L112 52.5 C116 51.2 119.5 52.8 117.5 56.2 C113 62 96 67 80 70.5" />
-          <path d="M92 60.5 L119 58.8 C122.5 58.5 124.5 60.8 122 63.2 L84 68.2" />
-          <path d="M84 63.5 L119 64.2 C122.5 64.3 124 66.8 121.5 69 L80 73.5" />
-          <path d="M56 64.5 C52 70 44 75 34 78" />
-        </motion.g>
-        {/* Right hand — Creator */}
-        <motion.g
-          initial={{ x: 14, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.35 }}
-        >
-          <path d="M420 74 L362 72.5 C354 72 346 71 340 68.5" />
-          <path d="M340 68.5 L307 67 C303.5 66.8 301.5 68.5 303.5 70.8 L358 75.5" />
-          <path d="M420 60.5 L360 60 C352 59.8 344 58.5 338 56.5" />
-          <path d="M338 56.5 L308 50.5 C304 49.2 300.5 50.8 302.5 54.2 C307 60 324 65 340 68.5" />
-          <path d="M328 58.5 L301 57 C297.5 56.7 295.5 59 298 61.4 L336 66.2" />
-          <path d="M336 61.5 L301 62.5 C297.5 62.6 296 65.1 298.5 67.3 L340 71.5" />
-          <path d="M364 62.5 C368 68 376 73 386 76" />
-        </motion.g>
-      </motion.svg>
-    </motion.div>
-  )
-}
-
 function Home({ onOpenCase }) {
   const [tab, setTab] = useState('projects')
   return (
@@ -146,7 +92,6 @@ function Home({ onOpenCase }) {
         <p>
           I'm a <span className="em">product designer & developer</span> with a passion for motion and craft. Previously Software Engineer Intern at <a className="dotted" href={LINKS.xarp} target="_blank" rel="noopener noreferrer">XARP, Reality Labs</a> — where I worked on a fully client-side Virtual Try-On engine and exploratory QA.
         </p>
-        <HandsDivider />
         <p>
           I design and build. <span className="em">Decide Together</span> is a Netflix couch-side concept for when two people sit down — say who's watching, get three explained picks, veto quietly, one tap to play. <span className="em">FUTbol</span> is a serverless Discord bot that runs the weekly cycle of a casual football group.
         </p>
