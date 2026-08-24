@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { trackPageView } from './analytics.js'
 import futbolLogo from './assets/futbol.svg'
 import theCouchProblem from './assets/the_couch_problem.png'
 import sayWhoHere from './assets/say_who_here.png'
@@ -306,6 +307,16 @@ export default function App() {
       window.removeEventListener('hashchange', sync)
     }
   }, [])
+
+  // GA4 SPA page_view — fires on every virtual navigation (home <-> case)
+  useEffect(() => {
+    try {
+      const path = window.location.pathname + window.location.search + window.location.hash
+      trackPageView(path)
+    } catch {
+      // ignore
+    }
+  }, [view])
 
   const openCase = () => {
     try {
