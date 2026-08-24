@@ -134,6 +134,41 @@ button { font: inherit; }
 .dotted:hover { border-color: var(--fg); color: var(--fg); }
 .em { color: var(--fg); font-weight: 500; }
 
+/* hands — creation of adam divider */
+.hands-divider {
+  display: grid;
+  place-items: center;
+  margin: 6px 0 14px;
+  color: var(--fg-faint);
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
+}
+.hands-divider svg {
+  width: 300px;
+  height: auto;
+  display: block;
+}
+[data-theme="dark"] .hands-divider {
+  opacity: 0.45;
+  color: var(--fg-subtle);
+}
+@media (max-width: 640px) {
+  .hands-divider {
+    margin: 4px 0 12px;
+    opacity: 0.5;
+  }
+  .hands-divider svg {
+    width: 210px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hands-divider * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 /* tabs */
 .tabs {
   display: flex;
