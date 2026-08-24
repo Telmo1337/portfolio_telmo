@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { trackPageView } from './analytics.js'
 import futbolLogo from './assets/futbol.svg'
+import handsof from './assets/handsof.webp'
 import theCouchProblem from './assets/the_couch_problem.png'
 import sayWhoHere from './assets/say_who_here.png'
 import showTheWhy from './assets/show_the_why.png'
@@ -84,6 +85,20 @@ function Fig({ src, alt }) {
   )
 }
 
+function HandsOfDivider() {
+  return (
+    <motion.div
+      className="hands-divider-img"
+      aria-hidden="true"
+      initial={{ opacity: 0, y: 6, filter: 'blur(6px)' }}
+      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
+    >
+      <img src={handsof} alt="" width="900" height="300" decoding="async" loading="eager" />
+    </motion.div>
+  )
+}
+
 function Home({ onOpenCase }) {
   const [tab, setTab] = useState('projects')
   return (
@@ -92,6 +107,7 @@ function Home({ onOpenCase }) {
         <p>
           I'm a <span className="em">product designer & developer</span> with a passion for motion and craft. Previously Software Engineer Intern at <a className="dotted" href={LINKS.xarp} target="_blank" rel="noopener noreferrer">XARP, Reality Labs</a> — where I worked on a fully client-side Virtual Try-On engine and exploratory QA.
         </p>
+        <HandsOfDivider />
         <p>
           I design and build. <span className="em">Decide Together</span> is a Netflix couch-side concept for when two people sit down — say who's watching, get three explained picks, veto quietly, one tap to play. <span className="em">FUTbol</span> is a serverless Discord bot that runs the weekly cycle of a casual football group.
         </p>
