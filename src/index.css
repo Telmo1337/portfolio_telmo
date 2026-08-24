@@ -149,8 +149,9 @@ button { font: inherit; }
   display: block;
   opacity: 0.82;
   filter: contrast(1.04);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 9%, black 91%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 9%, black 91%, transparent 100%);
+  /* smooth feather - 16% fade each side, double-layer for smoother alias */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 1%, black 17%, black 83%, transparent 99%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, transparent 1%, black 17%, black 83%, transparent 99%, transparent 100%);
 }
 [data-theme="dark"] .hands-divider-img img {
   opacity: 0.68;
