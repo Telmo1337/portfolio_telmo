@@ -143,24 +143,26 @@ button { font: inherit; }
   user-select: none;
 }
 .hands-divider-img img {
-  width: 360px;
-  max-width: 92%;
+  width: 300px;
+  max-width: 88%;
   height: auto;
   display: block;
-  opacity: 0.88;
-  filter: contrast(1.05);
+  opacity: 0.82;
+  filter: contrast(1.04);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 9%, black 91%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 9%, black 91%, transparent 100%);
 }
 [data-theme="dark"] .hands-divider-img img {
-  opacity: 0.72;
-  filter: brightness(1.15) contrast(1.05);
+  opacity: 0.68;
+  filter: brightness(1.15) contrast(1.04);
 }
 @media (max-width: 640px) {
   .hands-divider-img {
     margin: 0 0 8px;
   }
   .hands-divider-img img {
-    width: 260px;
-    opacity: 0.9;
+    width: 220px;
+    opacity: 0.84;
   }
 }
 @media (prefers-reduced-motion: reduce) {
