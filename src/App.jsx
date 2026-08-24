@@ -90,7 +90,7 @@ function Home({ onOpenCase }) {
     <>
       <div className="intro">
         <p>
-          I'm a <span className="em">product designer / engineer</span> with a passion for motion and craft. Previously Software Engineer Intern at <a className="dotted" href={LINKS.xarp} target="_blank" rel="noopener noreferrer">XARP, Reality Labs</a> — where I worked on a fully client-side Virtual Try-On engine and exploratory QA.
+          I'm a <span className="em">product designer & developer</span> with a passion for motion and craft. Previously Software Engineer Intern at <a className="dotted" href={LINKS.xarp} target="_blank" rel="noopener noreferrer">XARP, Reality Labs</a> — where I worked on a fully client-side Virtual Try-On engine and exploratory QA.
         </p>
         <p>
           I design and build. <span className="em">Decide Together</span> is a Netflix couch-side concept for when two people sit down — say who's watching, get three explained picks, veto quietly, one tap to play. <span className="em">FUTbol</span> is a serverless Discord bot that runs the weekly cycle of a casual football group.
